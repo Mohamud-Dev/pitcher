@@ -3,4 +3,5 @@ from . import main
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    title="Welcome to PITCHER"
+    return render_template('index.html', title=title)
