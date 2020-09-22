@@ -6,6 +6,18 @@
 
   {{ wtf.quick_form(pitch) }}
 
+  {% for pitch in pitches %}
+				<div class="list-group">
+					<a href="#">
+						<div class="list-item">
+							<p>{{pitch.id}}</p>
+						</div>
+						<h4>{{ pitch.description }}</h4>
+						<h6> by {{user.username}}.</h6>
+					</a>
+				</div>
+			{% endfor %}
+
 </div>
 
 
