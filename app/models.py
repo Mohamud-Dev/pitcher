@@ -19,12 +19,3 @@ class User(db.Model):
     def __repr__(self):
         return f'User {self.username}' 
 
-class Pitches(db.Model):
-    __tablename__= 'pitches'
-    category = db.Column(db.String(255))
-    pitch = db.Column(db.String(255))
-    time = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'pitches',lazy="dynamic")
-
-    def __repr__(self):
-        return f'User {self.name}'
