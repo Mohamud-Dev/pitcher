@@ -15,6 +15,7 @@ class User(db.Model):
     password = db.Column(db.String(255),nullable = False)
     pitches_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     pass_secure = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
 
     @property
     def password(self):
