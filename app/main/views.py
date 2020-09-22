@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for,abort
 from . import main
 from flask_login import login_required
-from ..models import User
+from ..models import User, Pitches
 
 @main.route('/')
 def index():
@@ -22,3 +22,22 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
+
+@main.route('/pitch', methods = ['GET','POST'])
+@login_required
+def new_pitch():
+    form = addPitch_form()
+    if form.validate_on_submit():
+        category = form.category.data
+        pitch= form.pitch.data
+
+
+        # Updated pitchinstance
+        new_pitch = Pitch(category= category,pitch= pitch)
+
+        title='New Pitch'
+
+        # save review method
+        new_pitch.save_pitch()
+
+        return render_template('pitch.html', title=title, pitch_entry= form)
