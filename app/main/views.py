@@ -5,3 +5,4 @@ from . import main
 def index():
     title="Welcome to PITCHER"
     return render_template('index.html', title=title)
+
