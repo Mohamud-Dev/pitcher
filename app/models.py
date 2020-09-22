@@ -46,10 +46,26 @@ class Pitches(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(255))
     pitch = db.Column(db.String(255))
-    time = db.Column(db.String(255))
+    downvotes = db.Column(db.Integer, default=int(0))
+    upvotes = db.Column(db.Integer, default=int(0))
     users = db.relationship('User',backref = 'pitches',lazy="dynamic")
     
     
     def __repr__(self):
         return f'User {self.name}'
+
+
+class Comment(db.Model):
+	""" This model handles the Comment model that will be mapped to the database"""
+
+	__tablename__='comments'
+	id = db.Column(db.Integer,primary_key=True)
+	body = db.Column(db.Text)
+	owner_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+        nullable=False)
+	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),
+        nullable=False)
+
+	def __repr__(self):
+		return f"Comment : id: {self.id} comment: {self.body}"
 
