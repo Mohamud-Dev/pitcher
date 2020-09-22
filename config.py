@@ -2,6 +2,8 @@ import os
 
 
 class Config:
+
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vector:12345q@localhost/pitcher'
     @staticmethod
     def init_app(app):
         pass
