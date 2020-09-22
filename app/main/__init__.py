@@ -1,6 +1,6 @@
 from flask import Blueprint
 main = Blueprint('main',__name__)
-from . import views,forms
+from . import views,forms,errors
 
 
 def create_app(config_name):
