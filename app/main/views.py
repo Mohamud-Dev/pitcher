@@ -23,21 +23,30 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
 
-@main.route('/pitch', methods = ['GET','POST'])
+@main.route('/pitches/new/<int:id>', methods = ['GET','POST'])
 @login_required
-def new_pitch():
-    form = addPitch_form()
+
+def new_pitch(self, id):
+    form = PitchForm
     if form.validate_on_submit():
+        pitch = form.description.data
+        owner = current_user._get_current_object()
         category = form.category.data
-        pitch= form.pitch.data
+
+        pitch = Pitch(pitch=form.pitch.data, owner=current_user._get_current_object(),category=form.category.data)
+        db.session.add(pitch)
+        db.session.commit()
+        return redirect(url_for('main.home'))
+    pitches = Pitch.query.order_by(Pitch.all())
+
+    return render_template('pitch.html',form=form, pitches=pitches)
+
+@main.route('/pitches/pitch_categories/')
+def categories():
+    product = Pitch.query.filter_by(category="product pitch").all()
+    promotion = Pitch.query.filter_by(category="promotion pitch").all()
+    pickupline = Pitch.query.filter_by(category="pickupline pitch").all()
+    interview = Pitch.query.filter_by(category="interview pitch").all()
+    return render_template('home.html',pickup=pickupline,interview=interview,product=product,promotion=promotion)
 
 
-        # Updated pitchinstance
-        new_pitch = Pitch(category= category,pitch= pitch)
-
-        title='New Pitch'
-
-        # save review method
-        new_pitch.save_pitch()
-
-        return render_template('pitch.html', title=title, pitch_entry= form)
