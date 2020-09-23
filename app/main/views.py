@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for,abort
 from . import main
 from flask_login import login_required
 from ..models import User, Pitches, Comment
+from .forms import PitchForm
 
 @main.route('/')
 def index():
@@ -16,10 +17,6 @@ def index():
     return render_template('categories.html', title=title,pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
 
 
-@main.route('/pitches/comment/new/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_comment(id):
-    return render_template('comments.html')
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -57,4 +54,21 @@ def categories():
     return render_template('categories.html',pickup=pickupline,interview=interview,product=product,promotion=promotion)
 
 
+@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@login_required
+def new_comment(pitch_id):
+    form = CommentForm()
+    pitch=Pitch.query.get(pitch_id)
+    if form.validate_on_submit():
+        description = form.description.data
 
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
+        db.session.add(new_comment)
+        db.session.commit()
+        flash('your comment has been added', 'hurray')
+
+
+        return redirect(url_for('.new_comment', pitch_id= pitch_id))
+
+    all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
+    return render_template('comments.html', form = form,comment = all_comments )

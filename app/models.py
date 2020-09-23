@@ -7,7 +7,7 @@ from . import login_manager
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255),unique = True,nullable = False)
@@ -16,6 +16,8 @@ class User(db.Model):
     pitches_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     pass_secure = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
+    pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
+    comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
 
     @property
     def password(self):
@@ -68,6 +70,8 @@ class Comment(db.Model):
 	description = db.Column(db.Text)
 	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),
         nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+        nullable= False)
 
 	def __repr__(self):
 		return f"Comment : id: {self.id} comment: {self.description}"
