@@ -36,17 +36,15 @@ def profile(uname):
 def new_pitch(self, id):
     form = PitchForm
     if form.validate_on_submit():
-        pitch = form.description.data
-        owner = current_user._get_current_object()
+        description = form.description.data
+        title = form.title.data
+        owner_id = current_user
         category = form.category.data
-
-        pitch = Pitch(pitch=form.pitch.data, owner=current_user._get_current_object(),category=form.category.data)
-        db.session.add(pitch)
+        print(current_user._get_current_object().id)
+        new_pitch = Pitches(owner_id =current_user._get_current_object().id, title = title,description=description,category=category)
+        db.session.add(new_pitch)
         db.session.commit()
-        return redirect(url_for('main.home'))
-    pitches = Pitch.query.order_by(Pitch.all())
-
-    return render_template('pitch.html',form=form, pitches=pitches)
+    return render_template('pitch.html',form=form, pitch=pitch)
 
 @main.route('/pitches/pitch_categories/')
 def categories():
