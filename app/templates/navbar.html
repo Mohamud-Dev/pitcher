@@ -1,22 +1,43 @@
-<div class="navbar navbar-dark bg-success" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <ul>
-            <a style="text-align: left; color: whitesmoke;" class="navbar-brand" href="/pitches/new/"> Post a Pitch </a>
-            </ul>
-        </div>
-        <div class="navbar-nav">
-            <a style="text-align: center; color: whitesmoke;" class="navbar-brand" href="/"> Home </a>
-
-        </div>
-
-        <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          {% if current_user.is_authenticated %}
-          <li >{{current_user.username}}</li>
-          <li><a style="color:black;"  href="{{url_for('auth.logout')}}"><b>Sign out</b> </a></li>
-          {% else %}
-          <li><a style="color:black;" href="{{url_for('auth.login')}}"><b> Sign in</b></a></li>
-          {%endif%}
-        </ul>
-      </div>
+<style>
+      .nav{
+        
+        background-color: lightseagreen;
+        height: 70px;
+        margin-bottom: 30px;
+        border-bottom: black;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 9999;}
+</style>
+<nav class="nav">
+    <a class="navbar-brand" href="/">Pitcher</a>
+   
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+        
+  <br>
+      
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('main.profile',uname=current_user.author)}}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.logout')}}">Sign out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('auth.login')}}">Sign in</a>
+        </li>
+        {%endif%}
+     
+      </ul>
+    </div>
+  </nav>
