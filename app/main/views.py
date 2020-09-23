@@ -12,9 +12,9 @@ def index():
     interviewpitch = Pitches.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitches.query.filter_by(category = "promotionpitch")
     productpitch = Pitches.query.filter_by(category = "productpitch")
-    
+    upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
 
-    return render_template('categories.html', title=title,pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
+    return render_template('categories.html', title=title,pitch = pitch,upvotes=upvotes, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
 
 
 
@@ -36,7 +36,6 @@ def new_pitch():
         pitch = form.pitch.data
         owner = current_user
         category = form.category.data
-
         new_pitch = Pitches(owner_id =current_user._get_current_object().id,pitch=pitch,category=category)
         db.session.add(new_pitch)
         db.session.commit()
@@ -45,13 +44,6 @@ def new_pitch():
 
     return render_template('pitch.html',form=form)
 
-@main.route('/pitches/pitch_categories/')
-def categories():
-    product = Pitches.query.filter_by(category="product pitch").all()
-    promotion = Pitches.query.filter_by(category="promotion pitch").all()
-    pickupline = Pitches.query.filter_by(category="pickupline pitch").all()
-    interview = Pitches.query.filter_by(category="interview pitch").all()
-    return render_template('categories.html',pickup=pickupline,interview=interview,product=product,promotion=promotion)
 
 
 @main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
