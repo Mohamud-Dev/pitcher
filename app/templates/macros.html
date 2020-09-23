@@ -8,8 +8,11 @@
 			    <p>{{category.pitch}}</p>
 
 			</blockquote>
-			<p>{{category.upvotes}}</span>  Upvotes</p>
-			<p>{{category.downvotes}}</span>  downvotes</p>
+			
+			<a href="" class="btn btn-info">comment</a>
+			<a href="" class= "btn btn-primary btn-sm"><i></i>Upvote <span>{{category.upvotes}}</span></a>
+			<a href="" class= "btn btn-danger btn-sm"><i class="far fa-thumbs-up"></i>Downvote <span>{{category.downvotes}}</span></a>
+
         {% endfor %}
     {% endif %}
 {% endmacro %}

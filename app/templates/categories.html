@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row">
+
+    <div class="jumbotron"><h1 style="color: black;">{{title}} </h1></div>
+    
+    <div class="col-md-12 welcome">
+        {% if current_user.is_authenticated%}
+        <a href="{{url_for('home.index')}}">See all Pitches</a>
+        {% else %}
+        <a href="{{url_for('auth.login')}}">Sign In</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <h5>categories</h5>
+    <ul>
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#product">Product</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#interview">Interviews</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#pickupline">Pickuplines</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#promotion">Promotion</a>
+    </li>
+    
+  </ul>
+    </div>
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 tab-content">
+  
+    <div id="product" class="container tab-pane active"><br>
+      {{ macro.display(productpitch) }}
+      
+    </div>
+    <div id="interview" class="container tab-pane fade"><br>
+      {{ macro.display(interviewpitch) }}
+    </div>
+    <div id="pickupline" class="container tab-pane fade"><br>
+      {{ macro.display(pickuplines)}}
+    </div>
+    <div id="promotion" class="container tab-pane fade"><br>
+      {{ macro.display(promotionpitch) }}
+    </div>
+    
+  
+  </div>
+  </div>
+</div>
+
+{% endblock%}

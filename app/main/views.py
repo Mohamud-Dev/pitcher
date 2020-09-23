@@ -37,14 +37,16 @@ def new_pitch(self, id):
     form = PitchForm
     if form.validate_on_submit():
         description = form.description.data
-        title = form.title.data
-        owner_id = current_user
+        owner = current_user._get_current_object()
         category = form.category.data
-        print(current_user._get_current_object().id)
-        new_pitch = Pitches(owner_id =current_user._get_current_object().id, title = title,description=description,category=category)
-        db.session.add(new_pitch)
+
+        pitch = Pitch(description=form.description.data, owner=current_user._get_current_object(),category=form.category.data)
+        db.session.add(pitch)
         db.session.commit()
-    return render_template('pitch.html',form=form, pitch=pitch)
+        return redirect(url_for('main.home'))
+    pitches = Pitch.query.order_by(Pitch.all())
+
+    return render_template('pitch.html',form=form, pitches=pitches)
 
 @main.route('/pitches/pitch_categories/')
 def categories():
@@ -52,6 +54,7 @@ def categories():
     promotion = Pitch.query.filter_by(category="promotion pitch").all()
     pickupline = Pitch.query.filter_by(category="pickupline pitch").all()
     interview = Pitch.query.filter_by(category="interview pitch").all()
-    return render_template('home.html',pickup=pickupline,interview=interview,product=product,promotion=promotion)
+    return render_template('categories.html',pickup=pickupline,interview=interview,product=product,promotion=promotion)
+
 
 
