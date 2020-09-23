@@ -1,12 +1,19 @@
 from flask import render_template, redirect, url_for,abort
 from . import main
 from flask_login import login_required
-from ..models import User, Pitches
+from ..models import User, Pitches, Comment
 
 @main.route('/')
 def index():
     title="Welcome to PITCHER"
-    return render_template('index.html', title=title)
+    pitch = Pitches.query.filter_by().first()
+    pickuplines = Pitches.query.filter_by(category="pickuplines")
+    interviewpitch = Pitches.query.filter_by(category = "interviewpitch")
+    promotionpitch = Pitches.query.filter_by(category = "promotionpitch")
+    productpitch = Pitches.query.filter_by(category = "productpitch")
+    
+
+    return render_template('index.html', title=title,pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
 
 
 @main.route('/pitches/comment/new/<int:id>', methods = ['GET','POST'])

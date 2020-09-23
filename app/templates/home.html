@@ -1,17 +1,19 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 {% block content %}
+<h1>{{title}}</h1>
 <div class="tab-content">
-    <div id="pickup" ><br>
+    <div id="pickup" >product pitches<br>
       {{ macro.display(product) }}
 
     </div>
-    <div id="interview"><br>
+    <div id="interview">interview pitches<br>
       {{ macro.display(interview) }}
     </div>
-    <div id="promotion"><br>
+    <div id="promotion">pickup lines<br>
       {{ macro.display(pickupline)}}
     </div>
-    <div id="product"><br>
+    <div id="product">promotion pitches<br>
       {{ macro.display(promotion) }}
     </div>
 
