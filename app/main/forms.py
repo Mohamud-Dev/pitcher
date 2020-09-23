@@ -13,3 +13,11 @@ class PitchForm(FlaskForm):
 class CommentForm(FlaskForm):
 	body = TextAreaField('',validators=[Required()])
 	submit = SubmitField() 
+
+class UpvoteForm(FlaskForm):
+	submit = SubmitField()
+
+
+class Downvote(FlaskForm):
+	submit = SubmitField()
+	

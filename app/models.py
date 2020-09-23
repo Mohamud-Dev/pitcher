@@ -66,12 +66,10 @@ class Comment(db.Model):
 	""" This model handles the Comment model that will be mapped to the database"""
 
 	__tablename__='comments'
+
 	id = db.Column(db.Integer,primary_key=True)
-	description = db.Column(db.Text)
-	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),
-        nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),
-        nullable= False)
+	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),nullable=False)
+    description = db.Column(db.Text)
 
 	def __repr__(self):
 		return f"Comment : id: {self.id} comment: {self.description}"
