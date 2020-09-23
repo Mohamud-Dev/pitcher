@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for,abort
 from . import main
 from flask_login import login_required
-from ..models import User, Pitches, Comment
+from ..models import User, Pitches, Comment, Upvote, Downvote
 from .forms import PitchForm
 
 @main.route('/')
@@ -12,13 +12,13 @@ def index():
     interviewpitch = Pitches.query.filter_by(category = "interviewpitch")
     promotionpitch = Pitches.query.filter_by(category = "promotionpitch")
     productpitch = Pitches.query.filter_by(category = "productpitch")
-    upvotes = Upvote.get_all_upvotes(pitch_id=Pitch.id)
+    upvotes = Upvote.get_all_upvotes(pitch_id=Pitches.id)
 
     return render_template('categories.html', title=title,pitch = pitch,upvotes=upvotes, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
 
 
 
-@main.route('/user/<uname>')
+@main.route('/profile/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 

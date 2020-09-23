@@ -13,11 +13,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(255),unique = True,nullable = False)
     email = db.Column(db.String(255),unique = True,nullable = False)
     password = db.Column(db.String(255),nullable = False)
-    pitches_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     pass_secure = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
+    pitch = db.relationship('Pitches', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
+    upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
+    downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
+
+
 
     @property
     def password(self):
@@ -46,12 +49,13 @@ class User(db.Model, UserMixin):
 class Pitches(db.Model):
     __tablename__= 'pitches'
     id = db.Column(db.Integer,primary_key = True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     category = db.Column(db.String(255))
     pitch = db.Column(db.String(255))
-    downvotes = db.Column(db.Integer, default=int(0))
-    upvotes = db.Column(db.Integer, default=int(0))
-    users = db.relationship('User',backref = 'pitches',lazy="dynamic")
-    
+    comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
+    upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
+    downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
+
 
     @classmethod
     def get_pitches(cls, id):
@@ -61,18 +65,17 @@ class Pitches(db.Model):
     def __repr__(self):
         return f'User {self.pitch}'
 
-
 class Comment(db.Model):
-	""" This model handles the Comment model that will be mapped to the database"""
-
-	__tablename__='comments'
-
-	id = db.Column(db.Integer,primary_key=True)
-	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),nullable=False)
+    __tablename__='comments'
+    
+    id = db.Column(db.Integer,primary_key=True)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
     description = db.Column(db.Text)
 
-	def __repr__(self):
-		return f"Comment : id: {self.id} comment: {self.description}"
+    
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
 
 class Upvote(db.Model):
     __tablename__ = 'upvotes'
