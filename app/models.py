@@ -50,6 +50,11 @@ class Pitches(db.Model):
     upvotes = db.Column(db.Integer, default=int(0))
     users = db.relationship('User',backref = 'pitches',lazy="dynamic")
     
+
+    @classmethod
+    def get_pitches(cls, id):
+        pitches = Pitch.query.order_by(pitch_id=id).desc().all()
+        return pitches
     
     def __repr__(self):
         return f'User {self.pitch}'
@@ -60,12 +65,10 @@ class Comment(db.Model):
 
 	__tablename__='comments'
 	id = db.Column(db.Integer,primary_key=True)
-	body = db.Column(db.Text)
-	owner_id = db.Column(db.Integer, db.ForeignKey('users.id'),
-        nullable=False)
+	description = db.Column(db.Text)
 	pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'),
         nullable=False)
 
 	def __repr__(self):
-		return f"Comment : id: {self.id} comment: {self.body}"
+		return f"Comment : id: {self.id} comment: {self.description}"
 

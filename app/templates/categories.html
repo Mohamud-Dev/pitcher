@@ -7,14 +7,8 @@
 <div class="row">
 
     <div class="jumbotron"><h1 style="color: black;">{{title}} </h1></div>
-    
-    <div class="col-md-12 welcome">
-        {% if current_user.is_authenticated%}
-        <a href="{{url_for('home.index')}}">See all Pitches</a>
-        {% else %}
-        <a href="{{url_for('auth.login')}}">Sign In</a>
-        {% endif %}
-    </div>
+    <a style="text-align: center" class="navbar-brand" href="/pitches/new/"> Create Pitch </a>
+   
 </div>
 
 <div class="row">

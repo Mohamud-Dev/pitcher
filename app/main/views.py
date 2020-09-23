@@ -13,7 +13,7 @@ def index():
     productpitch = Pitches.query.filter_by(category = "productpitch")
     
 
-    return render_template('index.html', title=title,pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
+    return render_template('categories.html', title=title,pitch = pitch, pickuplines=pickuplines, interviewpitch= interviewpitch, promotionpitch = promotionpitch, productpitch = productpitch)
 
 
 @main.route('/pitches/comment/new/<int:id>', methods = ['GET','POST'])
@@ -30,23 +30,23 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
 
-@main.route('/pitches/new/<int:id>', methods = ['GET','POST'])
+@main.route('/pitches/new/', methods = ['GET','POST'])
 @login_required
 
-def new_pitch(self, id):
+def new_pitch():
     form = PitchForm
     if form.validate_on_submit():
-        description = form.description.data
-        owner = current_user._get_current_object()
+        pitch = form.pitch.data
+        owner = current_user
         category = form.category.data
 
-        pitch = Pitch(description=form.description.data, owner=current_user._get_current_object(),category=form.category.data)
-        db.session.add(pitch)
+        new_pitch = Pitch(owner_id =current_user._get_current_object().id,pitch=pitch,category=category)
+        db.session.add(new_pitch)
         db.session.commit()
-        return redirect(url_for('main.home'))
-    pitches = Pitch.query.order_by(Pitch.all())
+        return redirect(url_for('main.index'))
+  
 
-    return render_template('pitch.html',form=form, pitches=pitches)
+    return render_template('pitch.html',form=form)
 
 @main.route('/pitches/pitch_categories/')
 def categories():
