@@ -1,11 +1,13 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% include 'navbar.html'%}
 
 {% block content %}
 <div class="container">
-
-  {{ wtf.quick_form(form) }}
-
+	<br>
+	<div class="wrapper">
+  		{{ wtf.quick_form(form) }}
+	</div>
   {% for pitch in pitches %}
 				<div class="list-group">
 					<a href="#">

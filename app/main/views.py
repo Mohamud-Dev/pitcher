@@ -32,18 +32,16 @@ def profile(uname):
 @login_required
 
 def new_pitch():
-    form = PitchForm
+    form = PitchForm()
     if form.validate_on_submit():
         pitch = form.pitch.data
-        owner = current_user
+        owner_id = current_user
         title = form.title.data
         category = form.category.data
         new_pitch = Pitches(owner_id =current_user._get_current_object().id,pitch=pitch,category=category,title=title)
-        db.session.add(new_pitch)
-        db.session.commit()
-        return redirect(url_for('main.index'))
-  
+        new_pitch.save_pitch()
 
+        return redirect(url_for('main.index'))
     return render_template('pitch.html',form=form)
 
 

@@ -6,9 +6,10 @@ from wtforms import ValidationError
 
 
 class PitchForm(FlaskForm):
-	pitch = TextAreaField("Add pitch",validators=[Required()])
+	title = StringField("title",validators=[Required()])
+	pitch = TextAreaField("pitch",validators=[Required()])
 	category = RadioField('Label', choices=[('pickup lines','pickup lines'), ('interview pitch','interview pitch'),('product pitch','product pitch'),('promotion pitch','promotion pitch')])
-	submit = SubmitField()
+	submit = SubmitField('submit')
 
 class CommentForm(FlaskForm):
 	description = TextAreaField('',validators=[Required()])
