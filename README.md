@@ -23,7 +23,7 @@ A flask project built with python for a pitching app, to allow users to post a p
 
 ## Link to live page
 
-Find the live page [here](https://vector-news-app.herokuapp.com/)
+Find the live page [here]()
 
 ## Technologies Used
  1. ubuntu linux for host OS
