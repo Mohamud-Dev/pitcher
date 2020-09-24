@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required, current_user
 from ..models import User, Pitches, Comment, Upvote, Downvote
 from .forms import PitchForm, CommentForm
-from .. import db
+from .. import db, photos
 
 @main.route('/')
 def index():
@@ -96,3 +96,14 @@ def downvote(pitch_id):
     new_downvote = Downvote(pitch_id=pitch_id, user = current_user)
     new_downvote.save_downvotes()
     return redirect(url_for('main.index'))
+
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'images/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
