@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for,abort
 from . import main
 from flask_login import login_required
 from ..models import User, Pitches, Comment, Upvote, Downvote
-from .forms import PitchForm
+from .forms import PitchForm, CommentForm
 
 @main.route('/')
 def index():
