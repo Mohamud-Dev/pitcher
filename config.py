@@ -8,13 +8,14 @@ class Config:
     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
-    UPLOADED_PHOTOS_DEST ='app/static/imagess'
+    UPLOADED_PHOTOS_DEST ='app/static/images'
     @staticmethod
     def init_app(app):
         pass
 
 
 class ProdConfig(Config):
+    
   
     '''
     Production  configuration child class
