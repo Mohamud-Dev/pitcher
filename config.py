@@ -5,6 +5,9 @@ class Config:
 
     SECRET_KEY = os.urandom(32)
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vector:12345q@localhost/pitcher'
+    # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
     @staticmethod
     def init_app(app):
         pass
