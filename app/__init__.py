@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
 from flask_uploads import UploadSet,configure_uploads,IMAGES
+from werkzeug.utils import secure_filename
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
