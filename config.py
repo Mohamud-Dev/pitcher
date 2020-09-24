@@ -14,7 +14,7 @@ class Config:
 
 
 class ProdConfig(Config):
-   
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     '''
     Production  configuration child class
     Args:
@@ -24,6 +24,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
+    
     '''
     Development  configuration child class
     Args:
