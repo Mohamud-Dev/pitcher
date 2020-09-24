@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255),nullable = False)
     pass_secure = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    pitch = db.relationship('Pitches', backref='user', lazy='dynamic')
+    pitches = db.relationship('Pitches', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
