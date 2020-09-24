@@ -1,8 +1,9 @@
 from flask import render_template, redirect, url_for,abort
 from . import main
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..models import User, Pitches, Comment, Upvote, Downvote
 from .forms import PitchForm, CommentForm
+from .. import db
 
 @main.route('/')
 def index():
@@ -35,8 +36,9 @@ def new_pitch():
     if form.validate_on_submit():
         pitch = form.pitch.data
         owner = current_user
+        title = form.title.data
         category = form.category.data
-        new_pitch = Pitches(owner_id =current_user._get_current_object().id,pitch=pitch,category=category)
+        new_pitch = Pitches(owner_id =current_user._get_current_object().id,pitch=pitch,category=category,title=title)
         db.session.add(new_pitch)
         db.session.commit()
         return redirect(url_for('main.index'))

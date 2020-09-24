@@ -2,18 +2,37 @@
 {% import 'macros.html' as macro %}
 
 {% block content %}
+<style>
+  .content{
+    background-color:lightseagreen ;
+    margin-top: 0;
+  }
+  a{
+    color: black;}
+  a:hover{
+    text-transform: uppercase;
+    text-decoration: none;
+    color: brown;
+      }
+  
+</style>
 
 <div class="container-fluid">
 <div class="row">
 
-    <div class="jumbotron"><h1 style="color: black;">{{title}} </h1></div>
-    <a style="text-align: center" class="navbar-brand" href="/pitches/new/"> Create Pitch </a>
+    <div class="text-center" ><h1>{{title}} </h1>
+    <button class="btn btn-success"><a  href="/pitches/new/"> Create Pitch </a>
+    </button></div>
+    <hr>
+    
+    
    
 </div>
 
-<div class="row">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <h5 class="text-center"><b> categories</b></h5>
+<div class="row content">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      
+        <h5 class="text-center"><b><u>categories</u> </b></h5>
     <ul>
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#product">Product</a>
@@ -51,6 +70,7 @@
     
   
   </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 tab-content"></div>
   </div>
 </div>
 

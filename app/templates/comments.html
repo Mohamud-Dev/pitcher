@@ -1,9 +1,11 @@
+{% include 'navbar.html'%}
 {% import 'bootstrap/wtf.html' as wtf %}
 {% extends 'bootstrap/base.html' %}
 {% import 'macros.html' as macro %}
 
 
 {% block content %}
+<div class="container-fluid">
 <div class="wrapper" style="margin-top:100px">
         {{wtf.quick_form(form)}}
 
@@ -12,6 +14,7 @@
         {{ macro.displayComment(comment) }}
 
 
+</div>
 </div>
 
 

@@ -52,6 +52,7 @@ class Pitches(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     category = db.Column(db.String(255))
+    title = db.Column(db.String(50))
     pitch = db.Column(db.String(255))
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
