@@ -12,7 +12,7 @@
 			<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-info">comment</a>
 			<a href="{{url_for('main.upvote',pitch_id = category.id)}}" class= "btn btn-primary btn-sm">Upvote <span>{{category.upvotes.count()}}</span></a>
 			<a href="{{url_for('main.downvote',pitch_id = category.id)}}" class= "btn btn-danger btn-sm">Downvote <span>{{category.downvotes.count()}}</span></a>
-
+			<hr>
         {% endfor %}
     {% endif %}
 {% endmacro %}
