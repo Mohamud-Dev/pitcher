@@ -1,3 +1,4 @@
+-e git://github.com/maxcountryman/flask-uploads.git#egg=elasticutils
 alembic==1.4.3
 Bootstrap-Flask==1.5
 click==7.1.2
