@@ -16,7 +16,6 @@ class Config:
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    SECRET_KEY= os.environ.get("SEC_KEY")
   
     '''
     Production  configuration child class

@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
 from flask_uploads import UploadSet,configure_uploads,IMAGES
-from flask_wtf.csrf import CsrfProtect
+
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -17,7 +17,7 @@ bs=Bootstrap()
 db = SQLAlchemy()
 simple = SimpleMDE()
 photos = UploadSet('photos',IMAGES)
-csrf = CsrfProtect()
+
 
 
 def create_app(config_name):
@@ -35,7 +35,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     simple.init_app(app)
-    csrf.init_app(app)
+ 
     
 
     # Registering the blueprint
