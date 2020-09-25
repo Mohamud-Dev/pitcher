@@ -1,11 +1,17 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro %}
 
+
 {% block content %}
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700&display=swap');
   body{
+    font-family: 'Fjalla One', sans-serif;
     background-color: lightseagreen;
-  }
+    
+}
+  
   .head{
     background-image: url(../static/sun.jpg);
     background-size: 100% 250px;
@@ -17,6 +23,7 @@
     margin-top: -30px;
   }
   .content{
+    font-family: 'Grenze Gotisch', cursive;
     background-color:lightseagreen ;
     margin-top: 0;
   }
@@ -32,9 +39,11 @@
   }
   .categ{
     font-weight: bold;
+    font-size: 20px;
   }
   
 </style>
+
 
 <div class="container-fluid">
 <div class="row top">
@@ -51,7 +60,7 @@
 <div class="row content">
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 categ">
       
-        <h5 class="text-center"><b><u>categories</u> </b></h5>
+        <h2 class="text-center"><b><u>categories</u> </b></h2>
     <ul  role="tablist">
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#product">Product</a><br>
